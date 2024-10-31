@@ -10,6 +10,6 @@ inputs:
     path: azureml:diabetes-dev-folder@latest
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: bobo-compute-instance
+compute: bobo-compute-cluster
 experiment_name: mslean_mlops1_diabetes_training_job
 description: MSLearn MLOps Challenge 1 - Create an ML job
