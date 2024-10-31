@@ -1,6 +1,7 @@
 name: Code checks
 
-on: push
+on:
+  workflow_dispatch:
 
 jobs:
   job1:
@@ -19,8 +20,3 @@ jobs:
     - name: Run linting tests
       run: |
         flake8 src/model/
-    - name: Run training job
-      run: |
-        az ml job create --file src/job.yml
-        --workspace-name bobo-azure-ml-workspace
-        --resource-group bobos-resource-group
