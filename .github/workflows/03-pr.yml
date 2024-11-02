@@ -1,6 +1,6 @@
 name: PR exercise
 
-on: pull-request
+on: pull_request
 jobs:
   placeholder-job:
     runs-on: ubuntu-latest
