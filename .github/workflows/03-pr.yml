@@ -1,0 +1,9 @@
+name: PR exercise
+
+on: pull-request
+jobs:
+  placeholder-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Will add code checks here in next challenge"
