@@ -11,7 +11,7 @@ jobs:
     name: experiment
     environment: development
     env:
-      TRAINING_DATA_PATH: ${{ env.TRAINING_DATA_PATH }}
+      TRAINING_DATA_PATH: ${{ vars.TRAINING_DATA_PATH }}
     steps:
       - name: Azure login
         uses: azure/login@v1
