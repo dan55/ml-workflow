@@ -1,14 +1,12 @@
 name: Deployment Environment
 
-environment:
-  name: development
-
 on: push
 
 jobs:
   login:
     runs-on: ubuntu-latest
     name: login
+    environment: development
     steps:
       - name: Azure login
         uses: azure/login@v1
