@@ -1,6 +1,8 @@
 name: PR exercise
 
-on: pull_request
+on:
+  workflow_dispatch:
+
 jobs:
   linting:
     name: linting03
