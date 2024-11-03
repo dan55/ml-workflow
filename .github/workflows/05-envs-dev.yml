@@ -14,7 +14,6 @@ jobs:
     environment: development
 
   train-in-prod:
-    environment: development
     needs: train-in-dev
     uses: ./.github/workflows/05-envs-base.yml
     with:
