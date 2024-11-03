@@ -21,7 +21,7 @@ jobs:
         run: az extension add -n ml -y
       - name: Run training job
         run: |
-          az ml job create --file src/job.yml --workspace-name bobo-azure-ml-workspace --resource-group bobos-resource-group
+          az ml job create --file src/job.yml -w bobos-new-ws -g bobos-new-rg
   train-in-prod:
     runs-on: ubuntu-latest
     name: production
