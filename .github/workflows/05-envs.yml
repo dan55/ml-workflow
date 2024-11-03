@@ -4,6 +4,7 @@ on: push
 
 jobs:
   login:
+    runs-on: ubuntu-latest
     name: login
     steps:
       - name: Azure login
