@@ -2,16 +2,14 @@ name: Deployment Environment
 
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
 
 jobs:
   train-in-dev:
     runs-on: ubuntu-latest
     name: experiment
     environment: development
-    # env:
-    #   TRAINING_DATA_PATH: ${{ vars.TRAINING_DATA_PATH }}
     steps:
       - name: Azure login
         uses: azure/login@v1
@@ -26,6 +24,7 @@ jobs:
           az ml job create --file src/job.yml -w bobos-new-ws -g bobos-new-rg
           --set inputs.training_data.type=uri_folder
           --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
+          --stream
   train-in-prod:
     runs-on: ubuntu-latest
     name: production
