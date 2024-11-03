@@ -11,7 +11,7 @@ jobs:
     with:
       training_data_path: azureml:diabetes-dev-folder@latest
       job_name: experiment
-    environment: development
+      environment: development
 
   train-in-prod:
     needs: train-in-dev
@@ -19,4 +19,4 @@ jobs:
     with:
       training_data_path: azureml:diabetes-prod-folder@latest
       job_name: prod
-    environment: production
+      environment: production

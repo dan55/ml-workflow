@@ -11,12 +11,16 @@ on:
         description: Job name
         required: true
         type: string
+      environment:
+        description: The Github env
+        required: true
+        type: string
 
 jobs:
   train:
     runs-on: ubuntu-latest
     name: ${{ vars.job_name }}
-    environment: development
+    environment: ${{ vars.environment }}
     steps:
       - name: Azure login
         uses: azure/login@v1
