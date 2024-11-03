@@ -15,7 +15,7 @@ jobs:
   train-in-prod:
     runs-on: ubuntu-latest
     name: train-prod
-    environment: prod
+    environment: production
     needs: train-in-dev
     steps:
       - name: Azure login
