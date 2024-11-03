@@ -3,10 +3,20 @@ name: Deployment Environment
 on: push
 
 jobs:
-  login:
+  train-in-dev:
     runs-on: ubuntu-latest
-    name: login
+    name: train-dev
     environment: development
+    steps:
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS_DEV}}
+  train-in-prod:
+    runs-on: ubuntu-latest
+    name: train-prod
+    environment: prod
+    needs: train-in-dev
     steps:
       - name: Azure login
         uses: azure/login@v1
