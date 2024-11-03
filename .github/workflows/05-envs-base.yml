@@ -20,7 +20,7 @@ jobs:
   train:
     runs-on: ubuntu-latest
     name: ${{ vars.job_name }}
-    environment: ${{ vars.environment }}
+    environment: development
     steps:
       - name: Azure login
         uses: azure/login@v1
