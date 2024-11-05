@@ -4,12 +4,12 @@ command: >-
   python train.py
   --reg_rate 0.01
   --training_data ${{ inputs.training_data }}
-inputs:
-  training_data:
-    type: uri_folder
-    path: azureml:diabetes-dev-folder@latest
-  reg_rate: 0.01
-environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+# inputs:
+#   training_data:
+#     type: uri_folder
+#     path: azureml:diabetes-dev-folder@latest
+#   reg_rate: 0.01
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py39-cpu@latest
 compute: aml-cluster
 experiment_name: mslean_mlops1_diabetes_training_job
 description: MSLearn MLOps Challenge 1 - Create an ML job
