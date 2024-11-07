@@ -9,6 +9,7 @@ command: >-
 #     type: uri_folder
 #     path: azureml:diabetes-dev-folder@latest
 #   reg_rate: 0.01
+# silly billy
 environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:33
 compute: aml-cluster
 experiment_name: mslean_mlops1_diabetes_training_job
