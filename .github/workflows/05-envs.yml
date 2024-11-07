@@ -32,9 +32,14 @@ jobs:
       - name: Register model
         run: >-
           az ml model create
+          -w bobos-new-ws
+          -g bobos-new-rg
           --name maybefallinlove-model
-          --path azureml://jobs/maybefallinlove/outputs/artifacts
+          --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
           --type mlflow_model
+      - name: Deploy model
+        run: >-
+
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
