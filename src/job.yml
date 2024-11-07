@@ -13,4 +13,4 @@ environment: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:33
 compute: aml-cluster
 experiment_name: mslean_mlops1_diabetes_training_job
 description: MSLearn MLOps Challenge 1 - Create an ML job
-name: maybefallinlove${{ inputs.run_id }}
+name: maybefallinlove${{inputs.run_id}}
