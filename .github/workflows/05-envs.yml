@@ -34,12 +34,23 @@ jobs:
           az ml model create
           -w bobos-new-ws
           -g bobos-new-rg
-          --name maybefallinlove-model
+          --name ifear-registered-model
           --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
           --type mlflow_model
+      - name: Create endpoint
+        run: >-
+          az ml online-endpoint create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          -f src/endpoint.yml
       - name: Deploy model
         run: >-
-
+          az ml online-deployment create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          -n diabetes-deploy
+          -f src/deploy.yml
+          --endpoint diabetes-endpoint
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production

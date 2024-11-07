@@ -1,0 +1,11 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: ifear-deploy
+endpoint_name: ifear-endpoint
+model: azureml:ifear-registered-model:latest
+environment:
+  image: mcr.microsoft.com/azureml/mlflow-ubuntu20.04-py38-cpu-inference:20241003.v2
+# code_configuration:
+#   code: ./model/
+#   scoring_script: score.py
+instance_type: Standard_DS1_v2
+instance_count: 1
