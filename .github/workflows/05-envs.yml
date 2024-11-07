@@ -21,10 +21,13 @@ jobs:
         run: az extension add -n ml -y
       - name: Run training job
         run: >-
-          az ml job create --file src/job.yml -w bobos-new-ws -g bobos-new-rg
+          az ml job create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          --file src/job.yml
+          --name ifear${{ github.run_id }}
           --set inputs.training_data.type=uri_folder
           --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
-          --set inputs.run_id=${{ github.run_id }}
           --stream
       - name: Register model
         run: >-
