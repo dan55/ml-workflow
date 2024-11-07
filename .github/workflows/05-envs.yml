@@ -48,9 +48,9 @@ jobs:
           az ml online-deployment create
           -w bobos-new-ws
           -g bobos-new-rg
-          -n diabetes-deploy
+          -n ifear-deploy
           -f src/deploy.yml
-          --endpoint diabetes-endpoint
+          --endpoint ifear-endpoint
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
