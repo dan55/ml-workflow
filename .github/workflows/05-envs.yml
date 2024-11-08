@@ -29,6 +29,13 @@ jobs:
       #     --set inputs.training_data.type=uri_folder
       #     --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
       #     --stream
+      - name: Download model
+        run: >-
+          az ml model download
+          -w bobos-new-ws
+          -g bobos-new-rg
+          --name wtf-is-going-on-model
+          --version 1
       # - name: Sleep
       #   run: sleep 120s
       # - name: Register model
@@ -52,8 +59,6 @@ jobs:
           -g bobos-new-rg
           -n ifear-deploy
           -f src/deploy.yml
-          --endpoint ifear-endpoint
-          --environment auto
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
