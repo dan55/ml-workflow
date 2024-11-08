@@ -19,26 +19,26 @@ jobs:
         uses: actions/checkout@main
       - name: Install az ml extension
         run: az extension add -n ml -y
-      - name: Run training job
-        run: >-
-          az ml job create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          --file src/job.yml
-          --name ifear${{ github.run_id }}
-          --set inputs.training_data.type=uri_folder
-          --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
-          --stream
-      - name: Sleep
-        run: sleep 120s
-      - name: Register model
-        run: >-
-          az ml model create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          --name ifear-registered-model
-          --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
-          --type mlflow_model
+      # - name: Run training job
+      #   run: >-
+      #     az ml job create
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     --file src/job.yml
+      #     --name ifear${{ github.run_id }}
+      #     --set inputs.training_data.type=uri_folder
+      #     --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
+      #     --stream
+      # - name: Sleep
+      #   run: sleep 120s
+      # - name: Register model
+      #   run: >-
+      #     az ml model create
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     --name ifear-registered-model
+      #     --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
+      #     --type mlflow_model
       # - name: Create endpoint
       #   run: >-
       #     az ml online-endpoint create
@@ -53,6 +53,7 @@ jobs:
           -n ifear-deploy
           -f src/deploy.yml
           --endpoint ifear-endpoint
+          --environment auto
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
