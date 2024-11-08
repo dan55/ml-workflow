@@ -1,10 +1,17 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: ifear-deploy
+name: ifear-deploy-ugh
 endpoint_name: ifear-endpoint
-model: azureml:ifear-registered-model:2
+model:
+  azureml:ifear-registered-model:2
+  # name: model
+  # version: 2
+  # path: ./model
+  # type: mlflow_model
+  # name: azureml:ifear-registered-model:3
 # version: latest
-environment:
-  image: mcr.microsoft.com/azureml/mlflow-ubuntu20.04-py38-cpu-inference:20241003.v2
+# environment:
+#   image: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:33
+#   conda_file: sdl
 # code_configuration:
 #   code: ./model/
 #   scoring_script: score.py
