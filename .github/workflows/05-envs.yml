@@ -46,12 +46,12 @@ jobs:
       #     --name ifear-registered-model
       #     --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
       #     --type mlflow_model
-      - name: Create endpoint
-        run: >-
-          az ml online-endpoint create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          -f src/endpoint.yml
+      # - name: Create endpoint
+      #   run: >-
+      #     az ml online-endpoint create
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     -f src/endpoint.yml
       - name: Print current dir
         run: pwd
       - name: List dir
@@ -60,7 +60,7 @@ jobs:
         run: ls wtf-is-going-on-model
       - name: Deploy model
         run: >-
-          az ml online-deployment update # create
+          az ml online-deployment create
           -w bobos-new-ws
           -g bobos-new-rg
           -n  wtf-is-going-on-deploy
