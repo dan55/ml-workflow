@@ -36,6 +36,13 @@ jobs:
           -g bobos-new-rg
           --name wtf-is-going-on-model
           --version 1
+      - name: Archive registered model
+        run: >-
+          az ml model archive
+          -w bobos-new-ws
+          -g bobos-new-rg
+          --name wtf-is-going-on-model
+          --version 1
       # - name: Sleep
       #   run: sleep 120s
       # - name: Register model
@@ -64,7 +71,6 @@ jobs:
           -w bobos-new-ws
           -g bobos-new-rg
           -n  wtf-is-going-on-deploy
-          --package-model
           -f src/deploy.yml
   # train-in-prod:
   #   runs-on: ubuntu-latest
