@@ -52,8 +52,13 @@ jobs:
       #     -w bobos-new-ws
       #     -g bobos-new-rg
       #     -f src/endpoint.yml
+
+      - name: Printn dir
+        run: pwd
       - name: List dir
         run: ls
+      - name: List subdir
+        run: ls wtf-is-going-on-model
       - name: Deploy model
         run: >-
           az ml online-deployment create
