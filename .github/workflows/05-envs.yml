@@ -64,7 +64,7 @@ jobs:
           -w bobos-new-ws
           -g bobos-new-rg
           -n  wtf-is-going-on-deploy
-          --version 2
+          --package-model
           -f src/deploy.yml
   # train-in-prod:
   #   runs-on: ubuntu-latest
