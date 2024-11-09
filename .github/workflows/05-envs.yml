@@ -60,7 +60,7 @@ jobs:
         run: ls wtf-is-going-on-model
       - name: Deploy model
         run: >-
-          az ml online-deployment create
+          az ml online-deployment update # create
           -w bobos-new-ws
           -g bobos-new-rg
           -n  wtf-is-going-on-deploy
