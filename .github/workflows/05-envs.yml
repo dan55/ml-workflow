@@ -25,7 +25,7 @@ jobs:
             /opt/az
           key: ${{ runner.os }}
       - name: Install az ml extension
-      - if: steps.cache-azure-cli.outputs.cache-hit != 'true'
+        if: steps.cache-azure-cli.outputs.cache-hit != 'true'
         run: az extension add -n ml -y
       # - name: Run training job
       #   run: >-
