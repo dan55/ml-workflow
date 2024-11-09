@@ -52,6 +52,8 @@ jobs:
       #     -w bobos-new-ws
       #     -g bobos-new-rg
       #     -f src/endpoint.yml
+      - name: List dir
+        run: ls
       - name: Deploy model
         run: >-
           az ml online-deployment create

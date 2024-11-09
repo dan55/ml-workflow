@@ -5,7 +5,7 @@ model:
   # azureml:wtf-is-going-on-model:1
   name: some-model
   version: 1
-  path: ../mlflow-diabetes/model/
+  path: ../wtf-is-going-on-model/model/
   type: mlflow_model
   # name: azureml:ifear-registered-model:3
 # version: latest
