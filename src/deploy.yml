@@ -1,17 +1,17 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: ifear-deploy-ugh
-endpoint_name: ifear-endpoint
+name: wtf-is-going-on-deploy
+endpoint_name: wtf-endpoint
 model:
-  azureml:ifear-registered-model:2
-  # name: model
-  # version: 2
-  # path: ./model
-  # type: mlflow_model
+  # azureml:wtf-is-going-on-model:1
+  name: some-model
+  version: 1
+  path: ../mlflow-diabetes/model/
+  type: mlflow_model
   # name: azureml:ifear-registered-model:3
 # version: latest
 # environment:
-#   image: azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:33
-#   conda_file: sdl
+#   image: azureml://locations/eastus/workspaces/b02e51fe-9272-4adc-a7c9-3dc86403dbd1/environments/DefaultNcdEnv-mlflow-ubuntu20-04-py38-cpu-inference/versions/20241003v2 # azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:33
+#   conda_file: ./model/
 # code_configuration:
 #   code: ./model/
 #   scoring_script: score.py

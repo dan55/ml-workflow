@@ -57,7 +57,7 @@ jobs:
           az ml online-deployment create
           -w bobos-new-ws
           -g bobos-new-rg
-          -n ifear-deploy
+          -n  wtf-is-going-on-deploy
           -f src/deploy.yml
   # train-in-prod:
   #   runs-on: ubuntu-latest
