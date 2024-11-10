@@ -27,7 +27,6 @@ jobs:
       - name: Install az ml extension
         if: steps.cache-azure-cli.outputs.cache-hit != 'true'
         run: az extension add -n ml -y
-      # DID THE CACHE WORK?
       # - name: Run training job
       #   run: >-
       #     az ml job create
@@ -43,15 +42,16 @@ jobs:
           az ml model download
           -w bobos-new-ws
           -g bobos-new-rg
-          --name wtf-is-going-on-model
+          --name bobos-model
           --version 1
-      - name: Archive registered model
-        run: >-
-          az ml model archive
-          -w bobos-new-ws
-          -g bobos-new-rg
-          --name wtf-is-going-on-model
-          --version 1
+          --registry-name bobos-model-registry
+      # - name: Archive registered model
+      #   run: >-
+      #     az ml model archive
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     --name wtf-is-going-on-model
+      #     --version 1
       # - name: Sleep
       #   run: sleep 120s
       # - name: Register model
@@ -62,12 +62,12 @@ jobs:
       #     --name ifear-registered-model
       #     --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
       #     --type mlflow_model
-      # - name: Create endpoint
-      #   run: >-
-      #     az ml online-endpoint create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     -f src/endpoint.yml
+      - name: Create endpoint
+        run: >-
+          az ml online-endpoint create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          -f src/endpoint.yml
       - name: Print current dir
         run: pwd
       - name: List dir
