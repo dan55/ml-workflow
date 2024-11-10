@@ -27,23 +27,25 @@ jobs:
       - name: Install az ml extension
         if: steps.cache-azure-cli.outputs.cache-hit != 'true'
         run: az extension add -n ml -y
-      - name: Run training job
-        run: >-
-          az ml job create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          --file src/job.yml
-          --name nervous-feeling-training-job${{ github.run_id }}
-          --set inputs.training_data.type=uri_folder
-          --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
-          --stream
+      # - name: Run training job
+      #   run: >-
+      #     az ml job create
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     --file src/job.yml
+      #     --name nervous-feeling-training-job${{ github.run_id }}
+      #     --set inputs.training_data.type=uri_folder
+      #     --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
+      #     --stream
+      # - name: Sleep
+      #   run: sleep 60s
       # - name: Register model
       #   run: >-
       #     az ml model create
       #     -w bobos-new-ws
       #     -g bobos-new-rg
-      #     --name ifear-registered-model
-      #     --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
+      #     --name nervous-feeling-registered-model
+      #     --path azureml://jobs/nervous-feeling-training-job${{ github.run_id }}/outputs/artifacts/model
       #     --type mlflow_model
       # - name: Download model
       #   run: >-
@@ -60,8 +62,6 @@ jobs:
       #     -g bobos-new-rg
       #     --name wtf-is-going-on-model
       #     --version 1
-      # - name: Sleep
-      #   run: sleep 120s
       # - name: Create endpoint
       #   run: >-
       #     az ml online-endpoint create
@@ -74,13 +74,12 @@ jobs:
       #   run: ls
       # - name: List subdir
       #   run: ls bobos-model
-      # - name: Deploy model
-      #   run: >-
-      #     az ml online-deployment create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     -n  wtf-is-going-on-deploy
-      #     -f src/deploy.yml
+      - name: Deploy model
+        run: >-
+          az ml online-deployment create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          -f src/deploy.yml
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
