@@ -27,24 +27,32 @@ jobs:
       - name: Install az ml extension
         if: steps.cache-azure-cli.outputs.cache-hit != 'true'
         run: az extension add -n ml -y
-      # - name: Run training job
-      #   run: >-
-      #     az ml job create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     --file src/job.yml
-      #     --name ifear${{ github.run_id }}
-      #     --set inputs.training_data.type=uri_folder
-      #     --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
-      #     --stream
-      - name: Download model
+      - name: Run training job
         run: >-
-          az ml model download
+          az ml job create
           -w bobos-new-ws
           -g bobos-new-rg
-          --name bobos-model
-          --version 1
-          --registry-name bobos-model-registry
+          --file src/job.yml
+          --name nervous-feeling-training-job${{ github.run_id }}
+          --set inputs.training_data.type=uri_folder
+          --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
+          --stream
+      # - name: Register model
+      #   run: >-
+      #     az ml model create
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     --name ifear-registered-model
+      #     --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
+      #     --type mlflow_model
+      # - name: Download model
+      #   run: >-
+      #     az ml model download
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     --name bobos-model
+      #     --version 1
+      #     --registry-name bobos-model-registry
       # - name: Archive registered model
       #   run: >-
       #     az ml model archive
@@ -54,33 +62,25 @@ jobs:
       #     --version 1
       # - name: Sleep
       #   run: sleep 120s
-      # - name: Register model
-      #   run: >-
-      #     az ml model create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     --name ifear-registered-model
-      #     --path azureml://jobs/ifear${{ github.run_id }}/outputs/artifacts
-      #     --type mlflow_model
       # - name: Create endpoint
       #   run: >-
       #     az ml online-endpoint create
       #     -w bobos-new-ws
       #     -g bobos-new-rg
       #     -f src/endpoint.yml
-      - name: Print current dir
-        run: pwd
-      - name: List dir
-        run: ls
-      - name: List subdir
-        run: ls bobos-model
-      - name: Deploy model
-        run: >-
-          az ml online-deployment create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          -n  wtf-is-going-on-deploy
-          -f src/deploy.yml
+      # - name: Print current dir
+      #   run: pwd
+      # - name: List dir
+      #   run: ls
+      # - name: List subdir
+      #   run: ls bobos-model
+      # - name: Deploy model
+      #   run: >-
+      #     az ml online-deployment create
+      #     -w bobos-new-ws
+      #     -g bobos-new-rg
+      #     -n  wtf-is-going-on-deploy
+      #     -f src/deploy.yml
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
