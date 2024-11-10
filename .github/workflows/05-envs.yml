@@ -27,16 +27,16 @@ jobs:
       - name: Install az ml extension
         if: steps.cache-azure-cli.outputs.cache-hit != 'true'
         run: az extension add -n ml -y
-      # - name: Run training job
-      #   run: >-
-      #     az ml job create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     --file src/job.yml
-      #     --name nervous-feeling-training-job${{ github.run_id }}
-      #     --set inputs.training_data.type=uri_folder
-      #     --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
-      #     --stream
+      - name: Run training job
+        run: >-
+          az ml job create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          --file src/job.yml
+          --name nervous-feeling-training-job${{ github.run_id }}
+          --set inputs.training_data.type=uri_folder
+          --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
+          --stream
       # - name: Sleep
       #   run: sleep 60s
       # - name: Register model

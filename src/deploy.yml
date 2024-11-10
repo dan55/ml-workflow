@@ -2,7 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.sch
 name: nervous-feeling-deploy
 endpoint_name: nervous-feeling-endpoint
 model:
-  azureml:nervous-feeling-registered-model:1
+  azureml:nervous-feeling-registered-model:2
   # azureml:wtf-is-going-on-model:1
   # name: bobos-model # some-model
   # version: 1
