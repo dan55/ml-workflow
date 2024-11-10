@@ -37,16 +37,16 @@ jobs:
           --set inputs.training_data.type=uri_folder
           --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
           --stream
-      # - name: Sleep
-      #   run: sleep 60s
-      # - name: Register model
-      #   run: >-
-      #     az ml model create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     --name nervous-feeling-registered-model
-      #     --path azureml://jobs/nervous-feeling-training-job${{ github.run_id }}/outputs/artifacts/model
-      #     --type mlflow_model
+      - name: Sleep
+        run: sleep 60s
+      - name: Register model
+        run: >-
+          az ml model create
+          -w bobos-new-ws
+          -g bobos-new-rg
+          --name nervous-feeling-registered-model
+          --path azureml://jobs/nervous-feeling-training-job${{ github.run_id }}/outputs/artifacts/model
+          --type mlflow_model
       # - name: Download model
       #   run: >-
       #     az ml model download
