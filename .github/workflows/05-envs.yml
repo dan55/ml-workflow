@@ -6,80 +6,94 @@ on:
       - main
 
 jobs:
-  train-in-dev:
+  dbr:
     runs-on: ubuntu-latest
-    name: experiment
-    environment: development
+    name: f-me
+    environment: production
     steps:
-      - name: Azure login
-        uses: azure/login@v1
+      - name: Databricks
+        run: |
+          databricks repos list
+          databricks repos update 823939263684334 --branch main
         with:
-          creds: ${{secrets.AZURE_CREDENTIALS_DEV}}
-      - name: Checkout repo
-        uses: actions/checkout@main
-      - name: Cache Azure CLI
-        id: cache-azure-cli
-        uses: actions/cache@v4
-        with:
-          path: |
-            /opt/az
-          key: ${{ runner.os }}
-      - name: Install az ml extension
-        if: steps.cache-azure-cli.outputs.cache-hit != 'true'
-        run: az extension add -n ml -y
-      - name: Run training job
-        run: >-
-          az ml job create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          --file src/job.yml
-          --name nervous-feeling-training-job${{ github.run_id }}
-          --set inputs.training_data.type=uri_folder
-          --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
-          --stream
-      - name: Sleep
-        run: sleep 60s
-      - name: Register model
-        run: >-
-          az ml model create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          --name nervous-feeling-registered-model
-          --path azureml://jobs/nervous-feeling-training-job${{ github.run_id }}/outputs/artifacts/model
-          --type mlflow_model
-      # - name: Download model
-      #   run: >-
-      #     az ml model download
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     --name bobos-model
-      #     --version 1
-      #     --registry-name bobos-model-registry
-      # - name: Archive registered model
-      #   run: >-
-      #     az ml model archive
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     --name wtf-is-going-on-model
-      #     --version 1
-      # - name: Create endpoint
-      #   run: >-
-      #     az ml online-endpoint create
-      #     -w bobos-new-ws
-      #     -g bobos-new-rg
-      #     -f src/endpoint.yml
-      # - name: Print current dir
-      #   run: pwd
-      # - name: List dir
-      #   run: ls
-      # - name: List subdir
-      #   run: ls bobos-model
-      - name: Deploy model
-        run: >-
-          az ml online-deployment create
-          -w bobos-new-ws
-          -g bobos-new-rg
-          -f src/deploy.yml
+          DATABRICKS_HOST: ${{DBR_HOST}}
+          # DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
+          DATABRICKS_CLIENT_ID: ${{DBR_SP_ID}}
+          DATABRICKS_CLIENT_SECRET: ${{DBR_SP_SECRET}}
+  # train-in-dev:
+  #   runs-on: ubuntu-latest
+  #   name: experiment
+  #   environment: development
+  #   steps:
+  #     - name: Azure login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{secrets.AZURE_CREDENTIALS_DEV}}
+  #     - name: Checkout repo
+  #       uses: actions/checkout@main
+  #     - name: Cache Azure CLI
+  #       id: cache-azure-cli
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: |
+  #           /opt/az
+  #         key: ${{ runner.os }}
+  #     - name: Install az ml extension
+  #       if: steps.cache-azure-cli.outputs.cache-hit != 'true'
+  #       run: az extension add -n ml -y
+  #     - name: Run training job
+  #       run: >-
+  #         az ml job create
+  #         -w bobos-new-ws
+  #         -g bobos-new-rg
+  #         --file src/job.yml
+  #         --name nervous-feeling-training-job${{ github.run_id }}
+  #         --set inputs.training_data.type=uri_folder
+  #         --set inputs.training_data.path=${{ vars.TRAINING_DATA_PATH }}
+  #         --stream
+  #     - name: Sleep
+  #       run: sleep 60s
+  #     - name: Register model
+  #       run: >-
+  #         az ml model create
+  #         -w bobos-new-ws
+  #         -g bobos-new-rg
+  #         --name nervous-feeling-registered-model
+  #         --path azureml://jobs/nervous-feeling-training-job${{ github.run_id }}/outputs/artifacts/model
+  #         --type mlflow_model
+  # - name: Download model
+  #   run: >-
+  #     az ml model download
+  #     -w bobos-new-ws
+  #     -g bobos-new-rg
+  #     --name bobos-model
+  #     --version 1
+  #     --registry-name bobos-model-registry
+  # - name: Archive registered model
+  #   run: >-
+  #     az ml model archive
+  #     -w bobos-new-ws
+  #     -g bobos-new-rg
+  #     --name wtf-is-going-on-model
+  #     --version 1
+  # - name: Create endpoint
+  #   run: >-
+  #     az ml online-endpoint create
+  #     -w bobos-new-ws
+  #     -g bobos-new-rg
+  #     -f src/endpoint.yml
+  # - name: Print current dir
+  #   run: pwd
+  # - name: List dir
+  #   run: ls
+  # - name: List subdir
+  #   run: ls bobos-model
+  # - name: Deploy model
+  #   run: >-
+  #     az ml online-deployment create
+  #     -w bobos-new-ws
+  #     -g bobos-new-rg
+  #     -f src/deploy.yml
   # train-in-prod:
   #   runs-on: ubuntu-latest
   #   name: production
