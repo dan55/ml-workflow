@@ -11,6 +11,8 @@ jobs:
     name: f-me
     environment: production
     steps:
+      - name: install CLI
+        run: pip install databricks-cli
       - name: Databricks
         run: |
           databricks repos list
