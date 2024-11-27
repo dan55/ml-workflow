@@ -14,7 +14,7 @@ jobs:
       - name: install CLI
         run: |
           pip install databricks-cli
-          /home/runner/.local/bin/databricks configure
+          /home/runner/.local/bin/databricks configure ${{secrets.DBR_HOST}}
       - name: Databricks
         run: |
           databricks repos list
