@@ -17,7 +17,7 @@ jobs:
           databricks repos list
           databricks repos update 823939263684334 --branch main
         env:
-          # DATABRICKS_HOST: ${{secrets.DBR_HOST}}
+          DATABRICKS_HOST: ${{secrets.DBR_HOST}}
           DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN}}
           # DATABRICKS_CLIENT_ID: ${{secrets.DBR_SP_ID}}
           # DATABRICKS_CLIENT_SECRET: ${{secrets.DBR_SP_SECRET}}
