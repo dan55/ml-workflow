@@ -13,13 +13,7 @@ jobs:
     steps:
       - name: Databricks
         run: |
-          databricks repos list
-          databricks repos update 823939263684334 --branch main
-        with:
-          DATABRICKS_HOST: ${{DBR_HOST}}
-          # DATABRICKS_TOKEN: $(DATABRICKS_TOKEN)
-          DATABRICKS_CLIENT_ID: ${{DBR_SP_ID}}
-          DATABRICKS_CLIENT_SECRET: ${{DBR_SP_SECRET}}
+          DATABRICKS_HOST=${{DBR_HOST}} DATABRICKS_CLIENT_ID=${{DBR_SP_ID}} DATABRICKS_CLIENT_SECRET=${{DBR_SP_SECRET}} databricks repos list
   # train-in-dev:
   #   runs-on: ubuntu-latest
   #   name: experiment
