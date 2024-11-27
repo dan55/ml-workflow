@@ -12,7 +12,9 @@ jobs:
     environment: production
     steps:
       - name: install CLI
-        run: pip install databricks-cli
+        run: |
+          pip install databricks-cli
+          /home/runner/.local/bin/databricks configure
       - name: Databricks
         run: |
           databricks repos list
