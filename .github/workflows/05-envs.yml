@@ -11,10 +11,7 @@ jobs:
     name: f-me
     environment: production
     steps:
-      - name: install CLI
-        run: |
-          pip install databricks-cli
-          /home/runner/.local/bin/databricks configure ${{secrets.DBR_HOST}}
+      - uses: databricks/setup-cli@main
       - name: Databricks
         run: |
           databricks repos list
